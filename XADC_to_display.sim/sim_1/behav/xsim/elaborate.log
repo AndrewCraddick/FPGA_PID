@@ -1,0 +1,14 @@
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6ad8ab84b1f8438987ebaca566a75d24 --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot XADC_tb_behav xil_defaultlib.XADC_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+ERROR: [VRFC 10-3180] cannot find port 'm_axis_resetn' on this module [C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sources_1/new/XADC_simulation.v:39]
+ERROR: [VRFC 10-3180] cannot find port 's_axis_aclk' on this module [C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sources_1/new/XADC_simulation.v:38]
+ERROR: [VRFC 10-3180] cannot find port 'm_axis_aclk' on this module [C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sources_1/new/XADC_simulation.v:37]
+ERROR: [VRFC 10-3180] cannot find port 'm_axis_tid' on this module [C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sources_1/new/XADC_simulation.v:36]
+ERROR: [VRFC 10-3180] cannot find port 'm_axis_tdata' on this module [C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sources_1/new/XADC_simulation.v:35]
+ERROR: [VRFC 10-3180] cannot find port 'm_axis_tready' on this module [C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sources_1/new/XADC_simulation.v:34]
+ERROR: [VRFC 10-3180] cannot find port 'm_axis_tvalid' on this module [C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sources_1/new/XADC_simulation.v:33]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.

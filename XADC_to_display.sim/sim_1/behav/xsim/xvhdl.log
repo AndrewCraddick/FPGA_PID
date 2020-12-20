@@ -1,0 +1,8 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0_drp_arbiter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'drp_arbiter'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0_drp_to_axi_stream.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'drp_to_axi4stream'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0_xadc_core_drp.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'xadc_wiz_0_xadc_core_drp'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0_axi_xadc.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'xadc_wiz_0_axi_xadc'

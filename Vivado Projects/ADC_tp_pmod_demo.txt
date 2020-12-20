@@ -1,0 +1,271 @@
+
+
+module top_ADC_to_pmod_demo(
+input wire clk_in1, // 450MHz
+input wire vauxp6,
+input wire vauxn6,
+output wire pmod
+);
+
+wire clock50MHz;                                                                                                                                   
+wire counter_clock; 
+//wire [11:0] counter;                                                 
+
+wire [15 : 0] di_in;     
+wire [6 : 0] daddr_in;
+wire den_in;  
+wire dwe_in;               
+wire drdy_out;          
+wire [15 : 0] do_out;   
+//wire dclk_in,            
+wire vp_in;              
+wire vn_in;                          
+wire [4 : 0] channel_out;
+wire eoc_out;           
+wire alarm_out;         
+wire eos_out;           
+wire busy_out;
+
+
+
+
+Clocking_wiz Clocking_wiz(
+.clk_out1(clk_out1), // 450MHz    
+.clk_out2(clock50MHz), // 50MHz    
+//.reset(reset),
+//.locked(locked),       
+.clk_in1(clk_in1)
+);                                                                                  
+                                                                                    
+
+XADC_wiz XADC_wiz (
+.di_in (di_in),      
+.daddr_in (daddr_in),    
+.den_in (den_in),              
+.dwe_in (1'b0),              
+.drdy_out (drdy_out),           
+.do_out (do_out),    
+.dclk_in (clock50MHz),             
+.vp_in (1'b0),              
+.vn_in (1'b0),              
+.vauxp6 (vauxp6),             
+.vauxn6 (vauxn6),             
+.channel_out (channel_out),
+.eoc_out (eoc_out),            
+.alarm_out (alarm_out),          
+.eos_out  (eos_out),            
+.busy_out (busy_out)           
+);
+
+ADC_counter_comparator ADC_counter_comparator(
+.counter_clock (clk_out1),   
+.DAC_data (do_out [15:4]), // [15:4] for 12 bits
+.pmod (pmod)
+); 
+ 
+
+endmodule
+
+
+------------------------------------------------------------------------------
+
+
+module XADC_wiz(
+// ------------ XADC CONNECTIONS ---------------
+
+input wire [15 : 0] di_in,     
+input wire [6 : 0] daddr_in,
+input wire den_in,  
+input wire dwe_in,               
+output wire drdy_out,          
+output wire [15 : 0] do_out,   
+input wire dclk_in,            
+input wire vp_in,              
+input wire vn_in,              
+input wire vauxp6,             
+input wire vauxn6,             
+output wire [4 : 0] channel_out,
+output wire eoc_out,           
+output wire alarm_out,         
+output wire eos_out,           
+output wire busy_out          
+
+);
+
+
+xadc_wiz_0 XADC_inst (
+.di_in            ( 16'b0              ), // This is the clock for writing in the control register, we aren't writing so we make it zero constantly
+.daddr_in         ( {2'b00,channel_out}), // ddadr configures channel_out
+.den_in           ( eoc_out            ), // input wire den_in
+.dwe_in           ( 1'b0               ), // input wire dwe_in
+.drdy_out         ( drdy_out           ), // analog Data ready signal
+.do_out           ( do_out             ), // output wire [15 : 0] do_out
+.dclk_in          ( dclk_in            ), // input wire dclk_in
+.vp_in            ( vp_in              ), // not used
+.vn_in            ( vn_in              ), // not used
+.vauxp6           ( vauxp6             ), // input wire vauxp6, instantiating Vaux6 as selected by channel_out
+.vauxn6           ( vauxn6             ), // input wire vauxn6
+.channel_out      ( channel_out        ), // selects ADC channel corresponding to Vaux6
+.eoc_out          ( eoc_out            ), // output wire eoc_out
+.alarm_out        ( alarm_out          ), // not used
+.eos_out          ( eos_out            ), // output wire eos_out
+.busy_out         ( busy_out           )  // output wire busy_out
+);
+
+endmodule
+
+
+----------------------------------------------------------------------------
+
+
+module Clocking_wiz(
+//input reset,
+input clk_in1,
+output clk_out1,
+output clk_out2
+//output locked    
+);
+    
+clk_wiz_0 clk_wiz_0
+   (
+    // Clock out ports
+    .clk_out1(clk_out1),     
+    .clk_out2(clk_out2),     
+    // Status and control signals
+    //.reset(reset),
+    //.locked(locked),       
+   // Clock in ports
+    .clk_in1(clk_in1)
+    );         
+    
+     
+endmodule
+
+
+------------------------------------------------------------------------------
+
+
+module ADC_counter_comparator(
+input counter_clock,
+input [11:0] DAC_data,
+output reg pmod
+);
+
+reg [11:0] counter = 0;
+
+always@(posedge counter_clock)
+    begin
+        if(counter <= 4095)
+            counter <= counter + 1;
+        else
+            counter <= 0;
+    end
+    
+    
+always@*
+    begin
+        if(counter <= DAC_data)
+            pmod <= 1;
+        else
+            pmod <= 0;
+    end
+    
+endmodule
+
+
+
+-------------------------------------------------------------------------------- CONSTRAINTS
+
+## Clock signal
+create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_ports clk_in1]
+set_property -dict {PACKAGE_PIN W5 IOSTANDARD LVCMOS33} [get_ports clk_in1]
+
+#create_clock -period 10 [get_ports clk_in1]
+##set_input_jitter [get_clocks -of_objects [get_ports clk_in1]] 0.02223
+
+##Pmod Header JXADC
+##Sch name = XA1_P
+set_property IOSTANDARD LVCMOS33 [get_ports vauxp6]
+
+##Sch name = XA1_N
+set_property PACKAGE_PIN J3 [get_ports vauxp6]
+set_property PACKAGE_PIN K3 [get_ports vauxn6]
+set_property IOSTANDARD LVCMOS33 [get_ports vauxn6]
+
+
+##Pmod Header JA
+##Sch name = JA1
+set_property PACKAGE_PIN J1 [get_ports pmod]
+set_property IOSTANDARD LVCMOS33 [get_ports pmod]
+
+
+set_property BITSTREAM.CONFIG.CONFIGRATE 33 [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+set_property CFGBVS VCCO [current_design]
+
+
+---------------------------------------------------------------------------------------- SIMULATION
+
+
+module Counter_tb(
+
+    );
+    reg counter_clock = 0;
+    reg [11:0] counter = 0;
+    
+    always #5 counter_clock = ~counter_clock;
+    
+    always@(posedge counter_clock or negedge counter_clock)
+    begin
+        if(counter <= 4095)
+            counter = counter + 1;
+        else
+            counter = 0;
+    end
+    
+    
+    //Counter_generator UUT (
+    //.counter_clock(counter_clock),
+    //.counter(counter)
+    //);
+    
+    
+endmodule
+
+
+-----------------------------------------------------------------------------------------
+
+
+module ADC_to_counter_tb(
+
+    );
+   
+reg [11:0] DAC_data = 2'b00;
+reg [11:0] counter = 2'b10;
+reg pmod;
+
+always@*
+        begin
+            if(counter <= DAC_data)
+                pmod = 1;
+              
+            else
+                pmod = 0;
+        end
+
+
+    initial 
+        begin
+           
+           #50 DAC_data = 2'b01;
+           #50 DAC_data = 2'b11;
+           #50 $finish;    
+           
+        end
+       
+
+endmodule
+
+
+----------------------------------------------------------------------------------------
+

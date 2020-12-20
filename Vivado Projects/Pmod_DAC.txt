@@ -1,0 +1,159 @@
+
+
+module Pmod_top(
+    input wire clk,
+    input wire [3:0] switch,
+    output wire pmod
+);
+
+
+
+switch_control switch_control (
+.switch(switch),
+.clk(clk),
+.duty_cycle(pmod)
+);
+
+
+endmodule
+
+
+---------------------------------------------------------------------
+
+
+module switch_control(
+    input clk,
+    input wire [3:0] switch,
+    output reg duty_cycle,
+    [3:0] pwm_clk
+
+);
+
+PWM PWM_inst (
+.pwm_clk(pwm_clk),
+.clk(clk)
+);
+    
+always@*
+	if      (switch[0] == 1'b1)
+			duty_cycle = pwm_clk[0];
+	else if (switch[1] == 1'b1)
+			duty_cycle = pwm_clk[1];
+	else if (switch[2] == 1'b1)
+			duty_cycle = pwm_clk[2];
+	else if (switch[3] == 1'b1)
+			duty_cycle = pwm_clk[3];
+	else
+			duty_cycle = 1'b0;
+
+endmodule
+
+
+------------------------------------------------------------------ SIMULATION
+
+
+module switch_control_tb(
+
+    );
+reg clk = 0;
+reg [3:0] switch;
+wire duty_cycle;
+
+always #5 clk = ~clk;
+
+initial begin
+    switch [1:0] = 0;
+    switch [3] = 0;
+    switch [2] = 1'b1;
+    #100 switch [2] = 0;
+    switch [1] = 1'b1;
+    //forever # 5 clk = ~clk;
+    #100 $finish;
+    
+    //#200 switch [2] = 1'b1;
+end
+
+switch_control UUT (
+.clk(clk),
+.switch(switch),
+.duty_cycle(duty_cycle)
+//.pwm_clk(pmw_clk)
+);
+   
+    
+endmodule
+
+
+------------------------------------------------------------------------
+
+module PWM_tb(
+
+    );
+
+reg clk = 0;
+wire [3:0] pwm_clk;
+
+always #5 clk = ~clk;
+
+PWM UUT (
+.pwm_clk(pwm_clk),
+.clk(clk)
+);
+endmodule
+
+
+---------------------------------------------------------------------------
+
+module Pmod_top_tb(
+
+    );
+
+reg clk = 0;
+reg [3:0] switch = 2'b10;
+wire pmod;
+//wire [3:0] pwm_clk = 0;
+
+initial begin
+    forever #5 clk = ~clk;
+    //switch = 4'b0;
+    #300 switch = 4'b0;
+    #300 switch = 4'b0010;
+    #300 switch = 4'b0100;
+    #300 $finish; 
+    
+end
+
+    
+    
+Pmod_top UUT (
+.switch(switch),
+.clk(clk),
+.pmod(pmod)
+);
+endmodule
+
+-------------------------------------------------------------------------------- CONSTRAINTS
+
+
+## Clock signal
+set_property PACKAGE_PIN W5 [get_ports clk]							
+	set_property IOSTANDARD LVCMOS33 [get_ports clk]
+	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk]
+ 
+## Switches
+set_property PACKAGE_PIN V17 [get_ports {switch[0]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {switch[0]}]
+set_property PACKAGE_PIN V16 [get_ports {switch[1]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {switch[1]}]
+set_property PACKAGE_PIN W16 [get_ports {switch[2]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {switch[2]}]
+set_property PACKAGE_PIN W17 [get_ports {switch[3]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {switch[3]}]
+
+
+##Pmod Header JA
+##Sch name = JA1
+set_property PACKAGE_PIN J1 [get_ports {pmod}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {pmod}]
+
+

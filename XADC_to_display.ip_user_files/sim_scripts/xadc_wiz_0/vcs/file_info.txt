@@ -1,0 +1,6 @@
+xadc_wiz_0_drp_arbiter.vhd,vhdl,xil_defaultlib,../../../../XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0_drp_arbiter.vhd,
+xadc_wiz_0_drp_to_axi_stream.vhd,vhdl,xil_defaultlib,../../../../XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0_drp_to_axi_stream.vhd,
+xadc_wiz_0_xadc_core_drp.vhd,vhdl,xil_defaultlib,../../../../XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0_xadc_core_drp.vhd,
+xadc_wiz_0_axi_xadc.vhd,vhdl,xil_defaultlib,../../../../XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0_axi_xadc.vhd,
+xadc_wiz_0.v,verilog,xil_defaultlib,../../../../XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v
