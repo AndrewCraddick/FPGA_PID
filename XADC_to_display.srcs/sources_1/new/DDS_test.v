@@ -18,8 +18,9 @@ module DDS_test(
     output reg [4:0] state_reg  // defines the current state of the FSM
     );
     
-    reg [5:0] chirp_loop_cntr;
-    reg [31:0] freq_phase_incr, period_wait_cnt;
+    reg [5:0] chirp_loop_cntr; // register that holds the current number of loops the cycle has gone through, the last number
+                               // is the number of phase increment (frequency increment) steps we want to take
+    reg [31:0] freq_phase_incr, period_wait_cnt; 
     
     wire [31:0] freq_period, phase_inc_step;
     assign phase_inc_step = 32'h0028f5c2; // phase increment step size is 2684354, this is how much we will increase the 
@@ -100,22 +101,22 @@ module DDS_test(
                             
                         WaitState : //5
                             begin
-                                if (period_wait_cnt >= freq_period)
+                                if (period_wait_cnt >= freq_period) // if counter has reached the total desired delay
                                     begin
-                                        period_wait_cnt <= 32'd0; 
-                                        chirp_loop_cntr <= chirp_loop_cntr + 1;
+                                        period_wait_cnt <= 32'd0; // resets the waiting counter
+                                        chirp_loop_cntr <= chirp_loop_cntr + 1; // add 1 to indicate that we've now covered the frequency corresponding to this step
                                         state_reg <= CheckLoopCntr;
                                     end
                                 else
                                     begin
-                                        period_wait_cnt <= period_wait_cnt + 1;
-                                        state_reg <= WaitState;
-                                    end
+                                        period_wait_cnt <= period_wait_cnt + 1; // counter that counts to 100 clock cycles to delay 100ns 
+                                        state_reg <= WaitState;                 // before increasing the phase increment (ie. frequency) by
+                                    end                                         // an amount of "phase_inc_step"
                             end
                             
                         CheckLoopCntr : //6
                             begin
-                                if(chirp_loop_cntr == 6'd25)
+                                if(chirp_loop_cntr == 6'd25) // this is the total number of frequency steps
                                     begin
                                         chirp_loop_cntr <= 6'd0;
                                         freq_phase_incr <= 32'd0;
@@ -123,8 +124,8 @@ module DDS_test(
                                     end
                                 else
                                     begin
-                                        chirp_loop_cntr <= chirp_loop_cntr + 1;
-                                        state_reg <= Start;
+                                        chirp_loop_cntr <= chirp_loop_cntr + 1; // continue incrementing the steps until incrementing however many increments specifued above
+                                        state_reg <= Start; // restart the loop/cycle
                                     end
                             end
                             
