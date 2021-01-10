@@ -1,7 +1,0 @@
-set_property SRC_FILE_INFO {cfile:C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/constrs_1/new/XADC_to_display_xdc.xdc rfile:../../../XADC_to_display.srcs/constrs_1/new/XADC_to_display_xdc.xdc id:1} [current_design]
-set_property src_info {type:XDC file:1 line:4 export:INPUT save:INPUT read:READ} [current_design]
-set_property -dict {PACKAGE_PIN W5 IOSTANDARD LVCMOS33} [get_ports clock]
-set_property src_info {type:XDC file:1 line:8 export:INPUT save:INPUT read:READ} [current_design]
-set_property PACKAGE_PIN J3 [get_ports vauxp6]
-set_property src_info {type:XDC file:1 line:9 export:INPUT save:INPUT read:READ} [current_design]
-set_property PACKAGE_PIN K3 [get_ports vauxn6]

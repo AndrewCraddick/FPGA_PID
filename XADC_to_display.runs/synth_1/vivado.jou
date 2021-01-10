@@ -2,11 +2,11 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Sat Dec 12 17:31:52 2020
-# Process ID: 2448
-# Current directory: C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.runs/synth_1
-# Command line: vivado.exe -log XADC_to_dispaly_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source XADC_to_dispaly_top.tcl
-# Log file: C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.runs/synth_1/XADC_to_dispaly_top.vds
-# Journal file: C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.runs/synth_1\vivado.jou
+# Start of session at: Sun Jan  3 03:53:06 2021
+# Process ID: 160076
+# Current directory: C:/Xilinx/Vivado/FPGA_PID/XADC_to_display.runs/synth_1
+# Command line: vivado.exe -log DDS_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source DDS_top.tcl
+# Log file: C:/Xilinx/Vivado/FPGA_PID/XADC_to_display.runs/synth_1/DDS_top.vds
+# Journal file: C:/Xilinx/Vivado/FPGA_PID/XADC_to_display.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
-source XADC_to_dispaly_top.tcl -notrace
+source DDS_top.tcl -notrace

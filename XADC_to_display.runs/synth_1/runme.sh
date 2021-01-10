@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.runs/synth_1'
+HD_PWD='C:/Xilinx/Vivado/FPGA_PID/XADC_to_display.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log XADC_to_dispaly_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source XADC_to_dispaly_top.tcl
+EAStep vivado -log DDS_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source DDS_top.tcl

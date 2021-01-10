@@ -1,11 +1,7 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.gen/sources_1/ip/xadc_wiz_0/xadc_wiz_0.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module xadc_wiz_0
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sources_1/new/XADC_simulation.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module XADC_simulation
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sim_1/imports/xadc_wiz_0/xadc_wiz_0.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module xadc_wiz_0
-WARNING: [VRFC 10-3609] overwriting previous definition of module 'xadc_wiz_0' [C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sim_1/imports/xadc_wiz_0/xadc_wiz_0.v:53]
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.srcs/sim_1/new/XADC_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module XADC_tb
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Xilinx/Vivado/XADC_to_display/XADC_to_display.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Xilinx/Vivado/FPGA_PID/XADC_to_display.srcs/sources_1/new/Phase_Accumulator_Control.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Phase_Accumulator_Control
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Xilinx/Vivado/FPGA_PID/XADC_to_display.srcs/sim_1/new/Phase_Accumulator_Control_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Phase_Accumulator_Control_tb
+INFO: [VRFC 10-2458] undeclared symbol m_axis_data_tready, assumed default net type wire [C:/Xilinx/Vivado/FPGA_PID/XADC_to_display.srcs/sim_1/new/Phase_Accumulator_Control_tb.v:27]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Xilinx/Vivado/FPGA_PID/XADC_to_display.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module glbl
